@@ -4,8 +4,13 @@ const MainController = {
   login(req, res) {
     res.render("pages/login");
   },
-  register(req, res) {
+  redirecionamento(req, res) {
+    res.redirect("/login");
+  },
+  cadastro(req, res) {
     res.render("pages/register");
   },
+  fazerLogin(req) {},
+  fazerCadastro(req) {},
 };
 module.exports = MainController;
