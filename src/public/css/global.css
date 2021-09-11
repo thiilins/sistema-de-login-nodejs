@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+#sucess_page {
+  padding: 3rem 6rem;
+}
+#title_box {
+  display: flex;
+  flex-direction: column;
+  color: grey;
+  padding-bottom: 3rem;
+}
