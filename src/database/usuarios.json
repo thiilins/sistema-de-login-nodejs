@@ -1,8 +1,14 @@
 [
   {
-    "id": "579f547e-214e-4847-bfd8-bf89a23e3735",
-    "name": "admin",
-    "email": "admin@admin.com",
-    "password": "admin"
+    "id": "5ea5473a-7dbb-4d02-86ca-737923806a54",
+    "name": "Usuario 16",
+    "email": "usuario1@usuario.com",
+    "password": "$2a$12$88qNUlIZq4skqbvPRZOREOLUQeqJRG.MSyZTrPJ5nQVMCu4gw9tqi"
+  },
+  {
+    "id": "9c5a20bf-6063-4c00-9694-2c754a9b3079",
+    "name": "usuario 29",
+    "email": "usuario2@usuario.com.br",
+    "password": "$2a$12$A2BiQ33SOtc1iGb89FJX9OGayWWCwSdGjRezm7Z28ULdFA.zbzZAO"
   }
 ]
