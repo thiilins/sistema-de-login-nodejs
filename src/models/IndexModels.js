@@ -1,31 +1,28 @@
 const { v4: uuid } = require("uuid");
 const fs = require("fs");
 const path = require("path");
-const usuariosJson = require("../database/usuarios.json");
+const usersJson = require("../database/users.json");
 const IndexModels = {
-  usuarios: usuariosJson,
-  localizarEmail(email) {
-    const usuarioLocalizado = this.usuarios.find((user) => user.email == email);
-    if (!usuarioLocalizado) return false;
-    return usuarioLocalizado;
+  users: usersJson,
+  findEmail(email) {
+    const foundUser = this.usuarios.find((user) => user.email == email);
+    if (!foundUser) return false;
+    return foundUser;
   },
-  cadastrarUsuario(name, email, password) {
-    const usuario = {
+  registerUser(name, email, password) {
+    const user = {
       id: uuid(),
       name,
       email,
       password,
     };
-    this.usuarios.push(usuario);
-    this.AtualizarJSON();
+    this.user.push(user);
+    this.updateJson();
     return;
   },
-  AtualizarJSON() {
-    const arquivoJSON = JSON.stringify(this.usuarios);
-    fs.writeFileSync(
-      path.resolve("src", "database", "usuarios.json"),
-      arquivoJSON
-    );
+  updateJson() {
+    const jsonFile = JSON.stringify(this.users);
+    fs.writeFileSync(path.resolve("src", "database", "users.json"), jsonFile);
   },
 };
 module.exports = IndexModels;

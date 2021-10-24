@@ -1,4 +1,3 @@
-const path = require("path");
 const IndexModels = require("../models/IndexModels");
 const crypto = require("../middlewares/crypto");
 
@@ -6,43 +5,43 @@ const MainController = {
   login(req, res) {
     res.render("pages/login", { pageTitle: "Login", error: "" });
   },
-  redirecionamento(req, res) {
+  redirect(req, res) {
     res.redirect("/login");
   },
-  sucesso(req, res) {
+  sucess(req, res) {
     res.render("pages/sucess", {
       pageTitle: "Sucesso",
-      usuario: req.session.user,
+      user: req.session.user,
     });
   },
-  cadastro(req, res) {
+  register(req, res) {
     res.render("pages/register", { pageTitle: "Cadastre-se" });
   },
-  fazerLogin(req, res) {
-    const { email, senha, lembrar } = req.body;
-    const usuario = IndexModels.localizarEmail(email);
-    const senhaU = usuario.password;
-    if (!usuario || !crypto.validar(senha, senhaU)) {
+  signIn(req, res) {
+    const { email, password, remember } = req.body;
+    const user = IndexModels.findEmail(email);
+    const cryptoPassword = user.password;
+    if (!user || !crypto.validate(password, cryptoPassword)) {
       return res.render("pages/login", {
         pageTitle: "Login",
-        error: "Usuario não existe ou a senha está errada!",
+        error: "userio não existe ou a senha está errada!",
       });
     }
-    if (lembrar != undefined) {
-      const id = usuario.id;
-      const mail = usuario.email;
-      const key = crypto.criar(id + mail + "34567890");
+    if (remember != undefined) {
+      const id = user.id;
+      const mail = user.email;
+      const key = crypto.keyGen(id, mail);
       res.cookie("auth", key, { maxAge: 60000 });
       res.cookie("user", mail, { maxAge: 60000 });
     }
 
-    req.session.user = usuario;
+    req.session.user = user;
     return res.redirect("/sucesso");
   },
-  fazerCadastro(req, res) {
-    const { nome, email, senha } = req.body;
-    const senhaC = crypto.criar(senha);
-    IndexModels.cadastrarUsuario(nome, email, senhaC);
+  signUp(req, res) {
+    const { name, email, password } = req.body;
+    const cryptoPassword = crypto.create(password);
+    IndexModels.registerUser(name, email, cryptoPassword);
 
     res.redirect("/login");
   },
