@@ -1,5 +1,5 @@
 const auth = {
-  verificar(req, res, next) {
+  verify(req, res, next) {
     if (typeof req.session.user != "undefined") {
       return next();
     } else {
@@ -15,4 +15,3 @@ const auth = {
   },
 };
 module.exports = auth;
-  

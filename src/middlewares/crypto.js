@@ -1,14 +1,20 @@
 const bcrypt = require("bcryptjs");
+const hash = "34567890";
 const crypto = {
-  criar(data) {
-    const crypto = bcrypt.hashSync(data, 12);
-    return crypto;
+  create(data) {
+    return bcrypt.hashSync(data, 12);
   },
-  validar(data, hash) {
-    const crypto = bcrypt.compareSync(data, hash);
-    return crypto;
+  validate(data, hash) {
+    return bcrypt.compareSync(data, hash);
+  },
+  keyGen(id, mail) {
+    const key = id + mail + hash;
+    return this.criar(key);
+  },
+  keyCompare(id, email, auth) {
+    const key = id + email + hash;
+    return this.validate(key, auth);
   },
 };
 
 module.exports = crypto;
-  

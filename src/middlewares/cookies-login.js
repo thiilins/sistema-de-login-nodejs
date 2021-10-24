@@ -2,12 +2,10 @@ const crypto = require("./crypto");
 const IndexModels = require("../models/IndexModels");
 const cookiesLogin = (req, res, next) => {
   if (req.cookies.user != undefined && req.session.user == undefined) {
-    const user = req.cookies.user;
-    const auth = req.cookies.auth;
-    const loginUser = IndexModels.localizarEmail(user);
+    const { user, auth } = req.cookies;
+    const loginUser = IndexModels.findEmail(user);
     const { id, email } = loginUser;
-    const key = id + email + "34567890"
-    if (loginUser || crypto.validar(key, auth)) {
+    if (loginUser || crypto.validate(id, email, auth)) {
       req.session.user = loginUser;
     }
   }
